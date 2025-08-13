@@ -74,7 +74,7 @@ export class UIControl {
         this.mainCallback('toggleMessier', this.tonightObjects);
         break;
       case 'getLanguage':
-        skyStore.setLanguageData(JSON.parse(content));
+        skyStore.setLanguage(JSON.parse(content));
         break;
       case 'getLatLon':
         this.mainCallback('setLocation', JSON.parse(content));

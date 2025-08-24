@@ -16,21 +16,58 @@ export class layerPanel {
   constructor(private config: typeof defaultConfig) {}
 
   getHTML() {
+    const c = this.config;
     return `
-        <ul id="sky-controls" class="controls-ul">
-          <li id="togglePlanets"><span>${t('planet')}</span><img src="${label}"></li>
-          <li id="togglePlanetOrbits"><span>${t('orbits')}</span><img src="${label}"></li>
-          <li id="toggleConstellations"><span>${t('con')}</span><img src="${label}"></li>
-          <li id="toggleBoundaries"><span>${t('conbound')}</span><img src="${conbound}"></li>
-          <li id="toggleGalaxy"><span>${t('gal')}</span><img src="${label}"></li>
-          <li id="toggleShowers"><span>${t('meteorshowers')}</span><img src="${label}"></li>
-          <li id="toggleMessier"><span>${t('messier')}</span><img src="${label}"></li>
-          <li id="toggleEquator"><span>${t('eq')}</span><img src="${eq_grid}"></li>
-          <li id="toggleAzAlt"><span>${t('az')}</span><img src="${label}"></li>
-          <li id="toggleMeridian"><span>${t('meridian')}</span><img src="${label}"></li>
-          <li id="toggleEclipticLine"><span>${t('ec')}</span><img src="${label}"></li>
-          <li id="toggleGround"><span>${t('ground')}</span><img src="${this.config.showGround?atmosphere_active:atmosphere}"></li>
-        </ul>
+      <ul id="sky-controls" class="controls-ul">
+        <li id="togglePlanets">
+          <span class="${c.showPlanets.planets ? 'active' : ''}">${t('planet')}</span>
+          <img src="${c.showPlanets.planets ? label_active : label}">
+        </li>
+        <li id="togglePlanetOrbits">
+          <span class="${c.showPlanets.orbits ? 'active' : ''}">${t('orbits')}</span>
+          <img src="${label}">
+        </li>
+        <li id="toggleConstellations">
+          <span class="${c.constellation.lines ? 'active' : ''}">${t('con')}</span>
+          <img src="${label}">
+        </li>
+        <li id="toggleBoundaries">
+          <span class="${c.showBoundraies ? 'active' : ''}">${t('conbound')}</span>
+          <img src="${c.showBoundraies ? conbound_active : conbound}">
+        </li>
+        <li id="toggleGalaxy">
+          <span class="${c.showGalaxy ? 'active' : ''}">${t('gal')}</span>
+          <img src="${label}">
+        </li>
+        <li id="toggleShowers">
+          <span class="${c.meteorshowers ? 'active' : ''}">${t('meteorshowers')}</span>
+          <img src="${label}">
+        </li>
+        <li id="toggleMessier">
+          <span class="${c.showMessier ? 'active' : ''}">${t('messier')}</span>
+          <img src="${label}">
+        </li>
+        <li id="toggleEquator">
+          <span class="${c.showRaDec ? 'active' : ''}">${t('eq')}</span>
+          <img src="${c.showRaDec ? eq_grid_active : eq_grid}">
+        </li>
+        <li id="toggleAzAlt">
+          <span class="${c.showAzAlt ? 'active' : ''}">${t('az')}</span>
+          <img src="${label}">
+        </li>
+        <li id="toggleMeridian">
+          <span class="${c.showMeridian ? 'active' : ''}">${t('meridian')}</span>
+          <img src="${label}">
+        </li>
+        <li id="toggleEclipticLine">
+          <span class="${c.showEcliptic ? 'active' : ''}">${t('ec')}</span>
+          <img src="${label}">
+        </li>
+        <li id="toggleGround">
+          <span class="${c.showGround ? 'active' : ''}">${t('ground')}</span>
+          <img src="${c.showGround ? atmosphere_active : atmosphere}">
+        </li>
+      </ul>
     `;
   }
 
@@ -47,7 +84,9 @@ export class layerPanel {
     if (!iconLi) return;
 
     const icon = iconLi.querySelector('img');
-    if (!icon) return;
+    const text = iconLi.querySelector('span');
+    if (text) text.classList.toggle('active', active);
+    if (!icon || !text) return;
 
     switch (toggleId) {
       case 'togglePlanets':

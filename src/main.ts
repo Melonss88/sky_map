@@ -47,11 +47,13 @@ const uiControl = new UIControl((action, payload) => {
     case 'togglePlanetOrbits':
       config.showPlanets.orbits = !config.showPlanets.orbits;
       app?.updateConfig({ showPlanets: config.showPlanets });
+      uiControl.updateViewIcon('togglePlanetOrbits', config.showPlanets.orbits);
       break;
     case 'toggleConstellations':
       app?.updateConfig({ constellation: config.constellation });
       config.constellation.lines = !config.constellation.lines;
       config.constellation.labels = !config.constellation.labels;
+      uiControl.updateViewIcon('toggleConstellations', config.constellation.lines);
       break;
     case 'toggleBoundaries':
       app?.updateConfig({ showBoundraies: !config.showBoundraies });
@@ -61,14 +63,17 @@ const uiControl = new UIControl((action, payload) => {
     case 'toggleGalaxy':
       app?.updateConfig({ showGalaxy: !config.showGalaxy });
       config.showGalaxy = !config.showGalaxy;
+      uiControl.updateViewIcon('toggleGalaxy', config.showGalaxy);
       break;
     case 'toggleShowers':
       app?.updateConfig({ meteorshowers: !config.meteorshowers });
       config.meteorshowers = !config.meteorshowers;
+      uiControl.updateViewIcon('toggleShowers', config.meteorshowers);
       break;
     case 'toggleMessier':
       app?.updateConfig({ showMessier: !config.showMessier });
       config.showMessier = !config.showMessier;
+      uiControl.updateViewIcon('toggleMessier', config.showMessier);
       break;
     case 'toggleEquator':
       app?.updateConfig({ showRaDec: !config.showRaDec });
@@ -78,14 +83,17 @@ const uiControl = new UIControl((action, payload) => {
     case 'toggleAzAlt':
       app?.updateConfig({ showAzAlt: !config.showAzAlt });
       config.showAzAlt = !config.showAzAlt;
+      uiControl.updateViewIcon('toggleAzAlt', config.showAzAlt);
       break;
     case 'toggleMeridian':
       app?.updateConfig({ showMeridian: !config.showMeridian });
       config.showMeridian = !config.showMeridian;
+      uiControl.updateViewIcon('toggleMeridian', config.showMeridian);
       break;
     case 'toggleEclipticLine':
       app?.updateConfig({ showEcliptic: !config.showEcliptic });
       config.showEcliptic = !config.showEcliptic;
+      uiControl.updateViewIcon('toggleEclipticLine', config.showEcliptic);
       break;
     case 'toggleGround':
       app?.updateConfig({ showGround: !config.showGround });
